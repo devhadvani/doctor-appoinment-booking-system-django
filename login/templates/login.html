@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container emp-profile">
+    
+        
+            <div class="center"><center>
+            <h3 class="register-heading mb-3">Login</h3>
+            <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                    <label for="html" class="col-sm-2">Email </label> <input class="col-sm-10 inputs " type="email" name="email"/><br>
+              <br>      <label for="password" class="col-sm-2 mt-3">Password </label><input class="col-sm-10 mt-3 inputs"  type="password" name="password" ><br>
+              <center>   <input class="col-sm-8 mt-5 btn btn-info"  type="submit" value="Submit"/></center>
+            </form>   <a href="{% url 'register' %}" class="profile-edit-btn mt-4">Register</button></a></center>
+            {% endblock %}

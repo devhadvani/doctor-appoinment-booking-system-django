@@ -1,0 +1,376 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+     {% if user.roles == 'is_doctor'%} 
+        Doctor Dashboard
+    {% else %}
+        Patient Dashboard
+    {% endif %}
+    {% endblock %}
+{% block content %}
+{% if request.user.is_authenticated%}
+{% if user.roles == 'is_doctor'%}
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img class="rounded-circle z-depth-2" alt="100x100" src='{{user.image.url}}'
+                    data-holder-rendered="true">
+                   
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                              {{user.username}}
+                            </h5>
+                            <h6>
+                          Hello Doctor !
+                            </h6>
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                 
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p><a href="{% url 'logout_form' %}" class="profile-edit-btn" >
+                <input type="button" class="profile-edit-btn" name="btnAddMore" value="Log Out"/></a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>LINK</p>
+                    <a href={% url 'home' %} >Blogs</a><br/>
+                    <a href={% url 'about' %} style="color:Blue">About</a><br/>
+                    
+                  
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>User Id</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.username}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Fisrt Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.first_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>999 999 9999</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Type of User</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>Doctor</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.address}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.city}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>State</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.state}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Pin Code</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.pin}}</p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Experience</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Hourly Rate</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>10$/hr</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Total Projects</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>230</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>English Level</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Availability</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>6 months</p>
+                                    </div>
+                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>           
+</div>
+<p><a href="{% url 'logout_form' %}">Log Out</a></p>
+{% else %}<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img class="rounded-circle z-depth-2" alt="100x100" src='{{user.image.url}}'
+                    data-holder-rendered="true">
+                   
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                              {{user.username}}
+                            </h5>
+                            <h6>
+                          Hello Patient !
+                            </h6>
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+              
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p><a href="{% url 'logout_form' %}" class="profile-edit-btn" >
+                <input type="button" class="profile-edit-btn" name="btnAddMore" value="Log Out"/></a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                 
+                    <p> LINK</p>
+                    <a href={% url 'home' %}>Blogs</a><br/>
+                    <a href={% url 'about' %} style="color:Blue">About</a><br/>
+                    
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>User Id</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.username}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Fisrt Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.first_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>999 999 9999</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Type of User</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>Patient</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.address}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.city}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>State</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.state}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Pin Code</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <p>{{user.pin}}</p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Experience</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Hourly Rate</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>10$/hr</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Total Projects</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>230</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>English Level</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Availability</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>6 months</p>
+                                    </div>
+                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>       
+{% endif %}
+
+{% else %}
+<div class="container emp-profile " style="margin-top: 10%">
+    
+        
+    <div class="center"><center>
+    <h3 class="register-heading mb-3">If you have already register then login or register your self</h3>
+    <a href="{% url 'log' %}"><button class="btn btn-primary">Login</button></a> 
+    <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a> 
+{% endif %}
+{% endblock %}

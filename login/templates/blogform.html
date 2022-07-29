@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container emp-profile">
+    
+   
+{% if request.user.is_authenticated%}
+{% if user.roles == 'is_doctor'%}
+ <a href={% url 'home' %}>Home</a>
+<h3 class="mb-3"> Enter Data</h3>
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+    {{form.title}}
+    </div>
+    <div class="form-group">
+    {{form.topic}}
+    </div><div class="form-group">
+    {{form.summary}}</div>
+
+    <div class="form-group">
+    {{form.description}}
+    </div>
+    <div class="form-group">
+    {{form.image}}
+</div>
+<div class="form-group">
+   Save as Draft {{form.draft}}
+</div>
+    <input type="submit" value="submit" class="btn btn-primary">
+</form>
+{%else %}
+<p>You are not allowed to submit</p>
+{%endif %}
+{%endif %}
+{% endblock %}

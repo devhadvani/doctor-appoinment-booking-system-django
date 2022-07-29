@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container emp-profile">
+    
+        
+           <div  style="text-align:justify;">
+            
+<h4> Doctor name       :-{{form.first_name}}</h4>
+<h4> Doctor Email        :-{{form.email}}<p style="font-size:14"> Event will be store in Doctor's email address's google calendar</p></h4>
+<h4> appointment date :{{start}}</h4>
+<h4> start time :{{time}}</h4>
+<h4> end time :{{end_time}}</h4>
+
+    <form method="post" action={% url 'confirm' %}>
+        {% csrf_token %}
+    
+    <input type="text" class="form-control" value="{{req}}" name="required" hidden>
+    <input type="date" class="form-control" value="{{start}}" name="starts" hidden>
+    <input type="time" class="form-control" value="{{time}}" name="time" hidden>
+    <input type="email" name='email'class="form-control" hidden value={{email}}>
+ 
+   <input type="submit" value="Confirm" class="btn btn-primary" >&nbsp&nbsp&nbsp<a href={%url 'doctor'%}>Cancel</a>
+    </form>
+</div>
+
+
+{%endblock%}

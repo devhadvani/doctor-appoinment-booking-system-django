@@ -1,0 +1,57 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+     {% if user.roles == 'is_doctor'%} 
+        Doctor Dashboard
+    {% else %}
+        Patient Dashboard
+    {% endif %}
+    {% endblock %}
+{% block content %}
+{% if request.user.is_authenticated%}
+{% if user.roles == 'is_doctor'%}
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+     <a href={% url 'home' %}>Home</a>
+<center>
+            <h3> {{blogs.title}}</h3>
+            <img src='{{blogs.image.url}}' width=100% height=''></center>
+            <h4>Summary</h4>
+            <p>{{blogs.summary}}</p>
+            <h4>Description</h4>
+            <p>{{blogs.description}}</p>
+
+                </div>
+            </div>
+        </div>
+    </form>           
+</div>
+
+{% else %}
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <a href={% url 'home' %}>Home</a>
+       <center>
+                   <h3> {{blogs.title}}</h3>
+                   <img src='{{blogs.image.url}}' width=100% height=''></center>
+                   <h4>Summary</h4>
+                   <p>{{blogs.summary}}</p>
+                   <h4>Description</h4>
+                   <p>{{blogs.description}}</p>
+       
+        </div>
+    </form>       
+{% endif %}
+
+{% else %}
+<div class="container emp-profile " style="margin-top: 10%">
+    
+        
+    <div class="center"><center>
+    <h3 class="register-heading mb-3">If you have already register then login or register your self</h3>
+    <a href="{% url 'log' %}"><button class="btn btn-primary">Login</button></a> 
+    <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a> 
+{% endif %}
+{% endblock %}

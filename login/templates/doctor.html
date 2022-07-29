@@ -1,0 +1,203 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+     {% if user.roles == 'is_doctor'%} 
+        Doctor Dashboard
+    {% else %}
+        Patient Dashboard
+    {% endif %}
+    {% endblock %}
+{% block content %}
+{% if request.user.is_authenticated%}
+{% if user.roles == 'is_doctor'%}
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img class="rounded-circle z-depth-2" alt="100x100" src='{{user.image.url}}'
+                    data-holder-rendered="true">
+             
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                              {{user.username}}
+                            </h5>
+                            <h6>
+                          Hello Doctor !
+                            </h6>
+                          
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p><a href={% url 'create_blog' %}><button type="button" class="btn btn-primary mb-3">Add Blogs</button></a><a href="{% url 'logout_form' %}" class="profile-edit-btn" >
+                <input type="button" class="profile-edit-btn" name="btnAddMore" value="Log Out"/></a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p> LINK</p>
+                    <a href={% url 'home' %} style="color:Blue">Blogs</a><br/>
+                    <a href={% url 'about' %}>About</a><br/>
+                    
+                </div>
+            </div>
+
+             
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <h4 class="mb-4">Draft Blogs</h4>
+                         {%for blogs in draft %}   
+                         {% comment %} {% if blog.draft == False %} {% endcomment %}
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <div class="card mb-4 box-shadow">   
+                        <img class="card-img-top" src='{{blogs.image.url}}' alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">{{blogs.title}}</h5>
+                          <h6 class="card-title">{{blogs.topic}}</h6>
+                          <p class="card-text">{{blogs.summary|slice:":15"}}...</p>
+                          <a href={% url 'blog' blogs.id %} class="btn btn-primary">Read</a>
+                        </div></div></div></div>
+                {% comment %} {%endif %} {% endcomment %}
+                          {%endfor %}
+                    
+
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                       <h4>Published Blog</h4>
+                        {%for blogs in blog %}   
+                        {% comment %} {% if blog.draft == False %} {% endcomment %}
+                           <div class="row">
+                               <div class="col-md-4">
+                                 <div class="card mb-4 box-shadow">   
+                       <img class="card-img-top" src='{{blogs.image.url}}' alt="Card image cap">
+                       <div class="card-body">
+                         <h5 class="card-title">{{blogs.title}}</h5>
+                         <h6 class="card-title">{{blogs.topic}}</h6>
+                         <p class="card-text">{{blogs.summary|slice:":15"}}...</p>
+                         <a href={% url 'blog' blogs.id %} class="btn btn-primary">Read</a>
+                       </div></div></div></div>
+               {% comment %} {%endif %} {% endcomment %}
+                         {%endfor %}
+                        
+                    </div>
+
+
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+
+                        {% for card in cards %}
+                        {#  Single Card Template:#}
+                        <div class="card" style="width: 18rem; margin: 10px">
+                          <img src="{{ card.image }}" class="card-img-top" >
+                          <div class="card-body">
+                            <div style="display: flex; flex-direction: row">
+                              <h5 class="card-title">{{ card.name }}</h5>
+                              {#  Colored cirlce:#}
+                              <div style="
+                                background: {{ card.color }};
+                                width: 20px;
+                                height: 20px;
+                                margin-left: 10px;
+                                border-radius: 50%;
+                              "></div>
+                            </div>
+                            <p class="card-text">{{ card.description }}</p>
+                            <a href="/command/{{ card.id }}/color" class="btn btn-primary">Change Color</a>
+                            <a href="/command/{{ card.id }}/delete" class="btn btn-primary">Delete</a>
+                          </div>
+                        </div>
+                        {% endfor %}
+
+
+
+
+            
+    </form>           
+</div>
+
+{% else %}<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img class="rounded-circle z-depth-2" alt="100x100" src='{{user.image.url}}'
+                    data-holder-rendered="true">
+        
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                              {{user.username}}
+                            </h5>
+                            <h6>
+                          Hello Patient !
+                            </h6>
+                         
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p><a href="{% url 'logout_form' %}" class="profile-edit-btn" >
+                <input type="button" class="profile-edit-btn" name="btnAddMore" value="Log Out"/></a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p> LINK</p>
+                    <a href={% url 'home' %} >Blogs</a><br/>
+                    <a href={% url 'about' %}>About</a><br/>
+                    <a href={% url 'doctor' %}style="color:Blue">Doctor</a><br/>
+                    
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    {% comment %} <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> {% endcomment %}
+                  
+                       {%for form in form %}   
+                             {% comment %} {% if blog.draft == False %} {% endcomment %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="card mb-4 box-shadow">   
+                            <img class="card-img-top" src='{{form.image.url}}' alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">{{form.first_name}}</h5>
+                             
+                              <a href={% url 'bookform' form.id %} class="btn btn-primary">Book Appointment</a>
+                              {%for msg in msg%}
+                                   {{msg}} 
+                              {%endfor%}
+                            </div></div></div></div>
+                    {% comment %} {%endif %} {% endcomment %}
+                              {%endfor %}
+                        
+                             
+                
+                            </div>
+                          </div>
+
+                                </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>       
+{% endif %}
+
+{% else %}
+<div class="container emp-profile " style="margin-top: 10%">
+    
+        
+    <div class="center"><center>
+    <h3 class="register-heading mb-3">If you have already register then login or register your self</h3>
+    <a href="{% url 'log' %}"><button class="btn btn-primary">Login</button></a> 
+    <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a> 
+{% endif %}
+{% endblock %}
